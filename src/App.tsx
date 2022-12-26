@@ -1,3 +1,4 @@
+import { PauseCircle, PlayCircle } from "@mui/icons-material";
 import { Box, Button, Grid, Slider, TextField } from "@mui/material";
 import { useState } from "react";
 
@@ -70,7 +71,7 @@ function App() {
   };
 
   return (
-    <Box sx={{ margin: "32px" }}>
+    <Box sx={{ margin: "32px", textAlign: "center"}}>
       <TextField
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -78,9 +79,7 @@ function App() {
         fullWidth
         label="Add text!"
       ></TextField>
-      <Button onClick={() => changePlay()} variant="contained" sx={{ mt: 2 }}>
-        {play ? "Pause" : "Play"}
-      </Button>
+      
 
       <br/>
       
@@ -93,10 +92,16 @@ function App() {
       <Slider value={wordIndex} onChange={handleWordIndexChange} sx={{width: "300px"}} min={0}
   max={getWords().length}/>
 
-      <Box>
+      <Box margin={"64px"} padding="32px" border="1px solid black">
         <h1>{getWords()[wordIndex]}</h1>
       </Box>
      
+      <Button onClick={() => changePlay()} variant="contained" sx={{ mt: 2 }} endIcon={play ? <PauseCircle/> : <PlayCircle/>}>
+        {play ? "Pause" : "Play"}
+      </Button>
+
+      
+
       <Box m={4}>
         <Grid container spacing={1}>
 
@@ -104,7 +109,7 @@ function App() {
         {getWords().map((word, i) => {
                 
           return (
-            <Grid xs={1} item sx={{ background: i === wordIndex ? "red" : "inherit" }} key={word}>
+            <Grid xs={4} md={1} item sx={{ background: i === wordIndex ? "red" : "inherit" }} key={word}>
               <Box
                 style={{
                   margin: "4px",
