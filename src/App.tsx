@@ -90,7 +90,7 @@ function App() {
       <Slider value={wordIndex} onChange={handleWordIndexChange} sx={{width: "300px"}} min={0}
   max={getWords().length}/>
 
-      <Box margin={"64px"} padding="32px" border="1px solid black">
+      <Box marginTop={"64px"} marginBottom={"64px"} padding="32px" borderTop="1px solid black" borderBottom="1px solid black" sx={{whiteSpace: "nowrap"}}>
         <h1>{getWords()[wordIndex]}</h1>
       </Box>
      
