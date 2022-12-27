@@ -79,6 +79,10 @@ function App() {
         fullWidth
         label="Add text!"
       ></TextField>
+
+      <Button onClick={() => setText("")} variant="contained" sx={{ mt: 2 }}>
+        Clear
+      </Button>
       
 
       <br/>
