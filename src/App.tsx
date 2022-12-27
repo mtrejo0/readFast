@@ -3,7 +3,7 @@ import { Box, Button, Grid, Slider, TextField } from "@mui/material";
 import { useState } from "react";
 
 function App() {
-  const [text, setText] = useState("Alfred Lord Tennyson wrote this poem as a requiem for his college friend Arthur Henry Hallam who died suddenly at the age of 22. The poem was published almost 21 after Arthur’s death and tracks the journey of Tennyson’s grief. The length of the poem, 2892 lines, adds to the meaning by emphasizing the greatness of the poet’s sadness and how Tennyson continued to mourn his friend throughout his life. The poem includes iconic lines that have become common cliches, like: “‘Tis better to have loved and lost / Than never to have loved at all.” The poem is a good example of British Victorian poetry, both in terms of meter and form. But it also emphasizes friendship as a relationship as important and meaningful as romantic love.");
+  const [text, setText] = useState("It’s about searching for, finding, and sharing some truth. That’s what I’m looking for in everybody’s music, in every genre–having the truth exposed. A truth always comes out in art. I think comedy finds it, and I think good songwriting finds it. I believe that all art is about this truth, which is almost invisible at most other times, when we’re less aware, locked in the drudgery of our day-to-day existences, until art breaks through and points it out to us. Sometimes I think of it as a search for low-hanging fruit, even though I know that’s not quite the right simile–it’s something people walk by all the time, something so ingrained in our environment that it’s become invisible, something so obvious nobody sees it anymore, but then someone figures out how to say what it is, or how to see it, and everyone else says, “Of course! Why didn’t I say that? That’s exactly right. I always knew that was there,” or “That’s exactly how I feel.” Like when Bill Callahan sings, “Well, I can tell you about the river / Or we could just get in.”");
 
   const [wordsPerMinute, setWordsPerMinute] = useState(60)
 
@@ -14,13 +14,7 @@ function App() {
   const [nextWordInterval, setNextWordInterval] = useState<any>()
 
   const getWords = () => {
-    return text.split(" ").map((each) =>
-        each
-          .toLowerCase()
-          .replace(/[^\w\s\']|_/g, "")
-          .replace(/\s+/g, " ")
-      )
-  
+    return text.split(" ")
   };
 
 
