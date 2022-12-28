@@ -15,9 +15,7 @@ function App() {
 
   const [nextWordInterval, setNextWordInterval] = useState<any>();
 
-  const getWords = () => {
-    return text.split(" ");
-  };
+  const words = text.split(/\s+/);
 
   const changePlay = () => {
     if (play) {
@@ -32,7 +30,7 @@ function App() {
 
       const i = setInterval(() => {
         setWordIndex((w) => {
-          if (w === getWords().length) return 0;
+          if (w === words.length) return 0;
           return w + 1;
         });
       }, waitTime);
@@ -95,7 +93,7 @@ function App() {
         onChange={handleWordIndexChange}
         sx={{ width: "300px" }}
         min={0}
-        max={getWords().length}
+        max={words.length}
       />
 
       <Box
@@ -106,7 +104,7 @@ function App() {
         borderBottom="1px solid black"
         sx={{ whiteSpace: "nowrap" }}
       >
-        <h1>{getWords()[wordIndex]}</h1>
+        <h1>{words[wordIndex]}</h1>
       </Box>
 
       <Button
@@ -120,14 +118,14 @@ function App() {
 
       <Box m={4}>
         <Grid container spacing={1}>
-          {getWords().map((word, i) => {
+          {words.map((word, i) => {
             return (
               <Grid
                 xs={4}
                 md={1}
                 item
                 sx={{ background: i === wordIndex ? "red" : "inherit" }}
-                key={word}
+                key={word + i}
               >
                 <Box
                   style={{
