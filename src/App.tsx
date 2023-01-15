@@ -1,13 +1,13 @@
 import { PauseCircle, PlayCircle } from "@mui/icons-material";
 import { Box, Button, Grid, Slider, TextField } from "@mui/material";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function App() {
   const [text, setText] = useState(
     "It’s about searching for, finding, and sharing some truth. That’s what I’m looking for in everybody’s music, in every genre–having the truth exposed. A truth always comes out in art. I think comedy finds it, and I think good songwriting finds it. I believe that all art is about this truth, which is almost invisible at most other times, when we’re less aware, locked in the drudgery of our day-to-day existences, until art breaks through and points it out to us. Sometimes I think of it as a search for low-hanging fruit, even though I know that’s not quite the right simile–it’s something people walk by all the time, something so ingrained in our environment that it’s become invisible, something so obvious nobody sees it anymore, but then someone figures out how to say what it is, or how to see it, and everyone else says, “Of course! Why didn’t I say that? That’s exactly right. I always knew that was there,” or “That’s exactly how I feel.” Like when Bill Callahan sings, “Well, I can tell you about the river / Or we could just get in.”"
   );
 
-  const [wordsPerMinute, setWordsPerMinute] = useState(60);
+  const [wordsPerMinute, setWordsPerMinute] = useState(240);
 
   const [wordIndex, setWordIndex] = useState(0);
 
@@ -30,7 +30,9 @@ function App() {
 
       const i = setInterval(() => {
         setWordIndex((w) => {
-          if (w === words.length) return 0;
+          if (w === words.length - 1) {
+            return words.length - 1
+          }
           return w + 1;
         });
       }, waitTime);
@@ -41,11 +43,11 @@ function App() {
     setPlay(!play);
   };
 
-  const pause = () => {
+  const pause = useCallback(() => {
     setPlay(false);
     clearInterval(nextWordInterval);
     setNextWordInterval(undefined);
-  };
+  }, [setPlay,setNextWordInterval, nextWordInterval])
 
   const handleWordsPerMinuteChange = (
     event: Event,
@@ -59,6 +61,12 @@ function App() {
     pause();
     setWordIndex(newValue as number);
   };
+
+  useEffect(() => {
+    if (wordIndex === words.length - 1) {
+      pause()
+    }
+  }, [wordIndex, words.length, pause])
 
   return (
     <Box sx={{ margin: "32px", textAlign: "center" }}>
